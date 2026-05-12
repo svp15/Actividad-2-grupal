@@ -14,16 +14,31 @@ class Automovil:
         self.multas=0
 
     def getvelocidadactual(self):
-        return self.velocidadactual
+        print(f"Velocidad actual: {self.velocidadactual}")
 
     def setvelocidadactual(self, nuevavelocidad):
-        self.velocidadactual=nuevavelocidad
+        if nuevavelocidad>self.velocidadmaxima:
+            self.multas=self.multas+1
+            print("No se puede acelerar más allá de la velocidad máxima permitida.")
+        elif nuevavelocidad<0:
+            print("No se puede desacelerar a una velocidad negativa.")
+        else:
+            self.velocidadactual=nuevavelocidad
+            print(f"Velocidad actual: {self.velocidadactual}")
 
     def getesautomatico(self):
-        return self.esautomatico
+        if self.esautomatico==True:
+            print("Es automático.")
+        else:
+            print("No es automático.")
     
     def setesautomatico(self, nuevarespuesta):
-        self.esautomatico=nuevarespuesta
+        if nuevarespuesta=="si":
+            self.esautomatico=True
+            print("El vehículo ahora es automático.")
+        else:
+            self.esautomatico=False
+            print("El vehículo ya no es automático.")
 
     def acelerar(self, aumento):
         if self.velocidadactual+aumento>self.velocidadmaxima:
@@ -45,8 +60,11 @@ class Automovil:
         print(f"Velocidad actual: {self.velocidadactual}")
 
     def calculartiempodellegada(self, distancia):
-        tiempodellegada=distancia/self.velocidadactual
-        print(f"El tiempo de llegada estimado es: {tiempodellegada}")
+        if self.velocidadactual!=0:
+            tiempodellegada=distancia/self.velocidadactual
+            print(f"El tiempo de llegada estimado en horas es: {tiempodellegada}")
+        else:
+            print("El vehículo no se está moviendo.")
 
     def sabersitienemultas(self):
         if self.multas>0:
@@ -71,7 +89,6 @@ class Automovil:
         print(f"Velocidad actual = {self.velocidadactual}")
         print(f"Es automático = {self.esautomatico}")
 
-
 def datos():
     marca=input("Ingrese la marca del automóvil: ")
     modelo=int(input("Ingrese el año de fabricación: "))
@@ -88,7 +105,9 @@ def datos():
     return Automovil(marca, modelo, motor, tipodecombustible, tipodeautomovil, puertas, asientos, velocidadmaxima, color, velocidadactual, esautomatico)
 
 p1=datos()
+p1.imprimir()
 p1.setvelocidadactual(100)
 p1.acelerar(20)
 p1.desacelerar(50)
 p1.frenar()
+p1.setvelocidadactual(-20)
