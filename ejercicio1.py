@@ -22,7 +22,11 @@ def datos():
     numerodedocumentodeidentidad=input("Ingrese el número de documento de identidad: ")
     añodenacimiento=int(input("Ingrese el año de nacimiento: "))
     paisdenacimiento=input("Ingrese el país de nacimiento: ")
-    genero=input("Ingrese el género: ")
+    genero=input("Ingrese el género (H/M): ")
+    if genero=="H":
+        genero="Hombre"
+    else:
+        genero="Mujer"
     print()
     return Persona(nombre, apellidos, numerodedocumentodeidentidad, añodenacimiento, paisdenacimiento, genero)
 
